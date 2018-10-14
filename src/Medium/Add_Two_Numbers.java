@@ -11,54 +11,74 @@ public class Add_Two_Numbers {
         int i = 0;
         int a,b;
         int c = 0;
-        while ( l1 != null && l2 != null)
+        while ( l1 != null || l2 != null)
         {
-            a = l1.val;
-            b = l2.val;
+            if (l1 != null)
+            {
+                a = l1.val;
+                l1 = l1.next;
+            }
+            else
+            {
+                a = 0;
+            }
+            if (l2 != null)
+            {
+                b = l2.val;
+                l2 = l2.next;
+            }
+            else
+            {
+                b = 0;
+            }
+
             c = c + (a + b) * (int)Math.pow(10, i);
 
-            l1 = l1.next;
-            l2 = l2.next;
+
+
             i++;
         }
 
         //将结果c所表示的数转换为ListNode
+        result = new ListNode(c%10);
+        c = c / 10;
+        ListNode d = result;
         while(c > 0)
         {
-            /*ListNode temp = new ListNode(c%10);
-            temp.next = result;
 
-            result = temp;
-
+            ListNode temp = new ListNode(c%10);
             c = c / 10;
-            */
-            ListNode temp = new ListNode(0);
-            if (result != null)
-            {
-                temp.val = result.val;
-            }
+            d.next = temp;
+            d =temp;
+
         }
 
         return result;
+
     }
 
     public static void main(String[] args) {
 
-        int[] a = {3,4,2};
-        int[] b = {5,6,4};
+        int[] a = {9};
+        int[] b = {1,9,9,9,9,9,9,9,9,9,9};
 
         ListNode L1 = null;
         ListNode L2 = null;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < a.length || i < b.length; i++)
         {
-            ListNode temp1 = new ListNode(a[i]);
-            ListNode temp2 = new ListNode(b[i]);
+            if (i < a.length)
+            {
+                ListNode temp1 = new ListNode(a[i]);
+                temp1.next = L1;
+                L1 = temp1;
+            }
 
-            temp1.next = L1;
-            temp2.next = L2;
-
-            L1 = temp1;
-            L2 = temp2;
+            if(i < b.length)
+            {
+                ListNode temp2 = new ListNode(b[i]);
+                temp2.next = L2;
+                L2 = temp2;
+            }
 
 
         }
